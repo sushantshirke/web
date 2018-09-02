@@ -1,0 +1,81 @@
+﻿<Window x:Class="WebReader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebReader"
+        mc:Ignorable="d"
+        xmlns:viewmodel="clr-namespace:WebReader.ViewModel"
+        WindowState="Maximized"
+        
+        Loaded="Window_Loaded"
+        
+       
+        
+        
+        Title="MainWindow" Height="450" Width="800">
+
+    <Window.DataContext>
+        <viewmodel:PageViewModel x:Name="vm"/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <Style TargetType="Control" x:Key="common">
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel Margin="5" LastChildFill="True" >
+        <StackPanel DockPanel.Dock="Top" Height="50" Background="LightGray" Orientation="Horizontal">
+            <!--<Label Style="{StaticResource common}" Width="AUTO" >Options Contracts for:</Label>
+            <ComboBox Name="cboContracts" Width="100"  Style="{StaticResource common}"  ItemsSource="{Binding}" ></ComboBox>-->
+            <Label Style="{StaticResource common}" >Expiry Date</Label>
+            
+            <ComboBox Name="cboExpirayDate" Style="{StaticResource common}" Width="100" SelectionChanged="cboExpirayDate_SelectionChanged" ></ComboBox>
+            <Label Height="30" Margin="5" Width="AUTO" Name="lblPriceTime" ></Label>
+            <Button Style="{StaticResource common}" Click="Export_click" >Export</Button>
+        </StackPanel>
+        <!--<StackPanel DockPanel.Dock="Top" >-->
+            <DataGrid DockPanel.Dock="Top"  Name="grdOI" AutoGenerateColumns="False" HorizontalAlignment="Stretch"  
+                       ItemsSource="{Binding}" HorizontalScrollBarVisibility="Visible" CanUserAddRows="False" 
+                         VerticalScrollBarVisibility="Visible" Margin="0,0,0,0"   >
+
+                <DataGrid.Columns>
+
+
+                    <DataGridTextColumn Header="OI" Binding="{Binding Path=Call_OpenInterest}" Foreground="DarkBlue" FontSize="12" FontWeight="Heavy" />
+                    <DataGridTextColumn Header="Chng in OI" Binding="{Binding Path=Call_ChangeinOpenInterest}" Foreground="DarkOliveGreen" FontWeight="Heavy" FontSize="12" />
+                    <DataGridTextColumn Header="Volume" Binding="{Binding Path=Call_TradedVolume}" />
+                    <DataGridTextColumn Header="IV" Binding="{Binding Path=Call_ImpliedVolatility}" />
+                    <DataGridTextColumn Header="LTP" Binding="{Binding Path=Call_LastTradedPrice}" />
+                    <DataGridTextColumn Header="Net Chng" Binding="{Binding Path=Call_NetChange}" />
+                    <DataGridTextColumn Header="Bid Qty" Binding="{Binding Path=Call_BidQuantity}" />
+                    <DataGridTextColumn Header="Bid Price" Binding="{Binding Path=Call_BidPrice}"  />
+                    <DataGridTextColumn Header="Ask Price" Binding="{Binding Path=Call_AskPrice}" />
+                    <DataGridTextColumn Header="Ask Qty" Binding="{Binding Path=Call_AskQuantity}" />
+
+                    <DataGridTextColumn Foreground="Red"  Header="Strike Price" Binding="{Binding Path=StrikePrice}" FontWeight="Heavy"   />
+
+                    <DataGridTextColumn Header="Bid Qty" Binding="{Binding Path=Put_BidQuantity}" />
+                    <DataGridTextColumn Header="Bid Price" Binding="{Binding Path=Put_BidPrice}" />
+                    <DataGridTextColumn Header="Ask Price" Binding="{Binding Path=Put_AskPrice}" />
+                    <DataGridTextColumn Header="Ask Qty" Binding="{Binding Path=Put_AskQuantity}" />
+                    <DataGridTextColumn Header="Net Chng" Binding="{Binding Path=Put_NetChange}" />
+                    <DataGridTextColumn Header="LTP" Binding="{Binding Path=Put_LastTradedPrice}" />
+                    <DataGridTextColumn Header="IV" Binding="{Binding Path=Put_ImpliedVolatility}" />
+                    <DataGridTextColumn Header="Volume" Binding="{Binding Path=Put_TradedVolume}" />
+                <DataGridTextColumn Header="Chng in OI" Binding="{Binding Path=Put_ChangeinOpenInterest}" Foreground="DarkOliveGreen" FontWeight="Heavy" />
+                    <DataGridTextColumn Header="OI" Binding="{Binding Path=Put_OpenInterest}" Foreground="DarkBlue" FontWeight="Heavy" />
+
+
+                </DataGrid.Columns>
+
+
+            </DataGrid>
+        <!--</StackPanel>-->
+        
+    </DockPanel>
+    
+</Window>
